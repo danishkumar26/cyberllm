@@ -1,0 +1,27 @@
+services:
+  cyberllm:
+    build: .
+    environment:
+      - CYBERLLM_PROVIDER=ollama
+      - CYBERLLM_MODEL=llama3.2
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - CYBERLLM_ENABLE_TI=false
+      - CYBERLLM_DEFAULT_FORMAT=markdown
+      - CYBERLLM_OUTPUT_DIR=/app/reports
+    volumes:
+      - ./samples:/app/samples:ro
+      - ./reports:/app/reports
+      - ./data/corrections:/app/data/corrections
+    depends_on:
+      - ollama
+    command: analyze /app/samples/auth.log --format markdown --out /app/reports/report.md
+
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama-data:/root/.ollama
+    ports:
+      - "11434:11434"
+
+volumes:
+  ollama-data:

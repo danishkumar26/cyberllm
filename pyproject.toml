@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cyberllm"
+version = "0.1.0"
+description = "LLM-powered security analysis platform for logs, alerts, threat intelligence, and defensive investigations."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "danishkumar26", email = "danishkumar26@example.com" },
+]
+license = { text = "MIT" }
+keywords = ["cybersecurity", "llm", "soc", "log-analysis", "threat-intelligence", "mitre-attck"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Security",
+    "Topic :: System :: Logging",
+]
+
+dependencies = [
+    "typer[all]>=0.12",
+    "rich>=13.0",
+    "pyyaml>=6.0",
+    "pydantic>=2.0",
+    "requests>=2.31",
+    "python-dateutil>=2.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.8",
+    "mypy>=1.8",
+]
+
+[project.scripts]
+cyberllm = "cyberllm.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cyberllm"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+select = ["E", "F", "I", "B", "C4"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_ignores = true

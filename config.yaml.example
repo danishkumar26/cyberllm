@@ -1,0 +1,43 @@
+# CyberLLM configuration file
+# Environment variables in .env take precedence over these values.
+
+provider: ollama
+model: llama3.2
+ollama_base_url: http://localhost:11434
+# openai_api_key: sk-...
+
+temperature: 0.1
+max_tokens: 1000
+max_lines: 200
+
+enable_mitre: true
+enable_ti: false
+
+# Threat intel providers: virustotal, abuseipdb, local, none
+ti_providers:
+  - local
+
+# Local allow-list (CIDR or IP, one per line under this key)
+local_allow_list:
+  - 127.0.0.1
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - 192.168.0.0/16
+
+# Local block-list (known bad indicators)
+local_block_list: []
+
+# Reporting
+default_format: markdown
+output_dir: ./reports
+
+# Parsers enabled
+parsers:
+  - syslog
+  - json
+  - apache
+  - windows_event
+
+# Human-in-the-loop: store analyst corrections for few-shot learning
+store_corrections: true
+corrections_dir: ./data/corrections

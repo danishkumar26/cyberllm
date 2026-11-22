@@ -96,10 +96,9 @@ cyberllm/
 │   ├── enrichment.py       # Threat intel enrichment
 │   ├── mitre.py            # MITRE ATT&CK technique mapping
 │   ├── reporter.py         # Markdown/JSON/SIEM report generation
-│   └── providers/          # LLM provider abstractions
-│       ├── base.py
-│       ├── ollama.py
-│       └── openai.py
+│   ├── providers/          # LLM provider abstractions
+│   │   ├── __init__.py     # provider factory: get_provider()
+│   │   └── base.py         # BaseProvider, AnalysisResult, OllamaProvider, OpenAIProvider
 ├── tests/                  # pytest suite
 ├── samples/                # Example log files
 ├── config.yaml.example     # Configuration template
